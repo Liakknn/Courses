@@ -1,0 +1,13 @@
+﻿cmake_minimum_required(VERSION 3.8)
+project(HelloWord-CMake C)
+
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED TRUE)
+
+if("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC")
+	add_compile_options(/W4 /WX)
+elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
+	add_compile_options(-Weverything -Werror)
+endif()
+
+add_executable(HelloWord "main.c")
