@@ -5,3 +5,6 @@ Release/
 *.filters
 *.user
 *.sln
+cmake-build-debug/
+cmake-build-release/
+.idea/
