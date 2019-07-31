@@ -22,6 +22,9 @@ int main(int argc, const char **argv) {
     if(a == 0 && b == 0 && c != 0) {
         printf("Некорректные коэффициенты");
     }
+    if(a == 0 && c == 0 && b != 0) {
+        printf("x = 0");
+    }
     if (c == 0 && a != 0 && b != 0) {
         double x = -b / a;
         printf("Квадратное уравнение неполное, корни уравнения: x1 = 0, x2 = %g", x);
