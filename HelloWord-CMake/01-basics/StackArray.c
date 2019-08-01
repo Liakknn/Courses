@@ -8,7 +8,7 @@ void print_memory(const void* ptr) {
 	putchar('\n');
 }
 
-int main(int argc, const char** argv) {
+int main(/*int argc, const char** argv */) {
 	//for (int i = 0; i < argc; ++i) {
 	//	printf("%s\n", argv[i]);
 	//}
