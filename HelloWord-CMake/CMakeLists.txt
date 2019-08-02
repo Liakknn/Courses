@@ -8,6 +8,8 @@ if("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC")
 	add_compile_options(/W4 /WX /D_CRT_SECURE_NO_WARNINGS)
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
 	add_compile_options(-Weverything -Werror)
+elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
+	add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
 
