@@ -2,3 +2,10 @@
 
 add_executable(StackVariables "StackVariables.c")
 add_executable(StackArray "StackArray.c")
+add_executable(C1 "C1.c")
+add_executable(H1 "H1.c")
+add_executable(C2 "C2.c")
+add_executable(C3 "C3.c")
+add_executable(C4 "C4.c")
+add_executable(H2 "H2.c")
+
