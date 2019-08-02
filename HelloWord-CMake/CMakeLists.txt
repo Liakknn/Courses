@@ -15,3 +15,4 @@ endif()
 
 # comment
 add_subdirectory(01-basics)
+add_subdirectory(02-functions)
