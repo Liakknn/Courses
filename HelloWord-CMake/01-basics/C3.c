@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <windows.h>
 
+/**
+ * Вычисляет количество секунд, прошедших с последнего часа.
+ * @param count - входной параметр количество секунд
+ * @return количество секунд, прошедших с последнего часа.
+ */
 int countSeconds(int count) {
     int countHours = count / 3600;
     return count - countHours * 3600;

@@ -2,14 +2,22 @@
 #include <windows.h>
 #include <stdlib.h>
 
+/**
+ * Переставляет сотни и десятки в числе.
+ * Возвращает число с переставленными сотнями и десятками.
+ * @param unit - цифра единиц в трехзначном числе
+ * @param decades - цифра десятков в трехзначном числе
+ * @param hundred - цифра сотен в трехзначном числе
+ * @param number - принимаемое число
+ */
 int permutation(int number) {
-    int b, c, d;
-    b = number % 10;
+    int unit, decades, hundred;
+    unit = number % 10;
     number /= 10;
-    c = number % 10;
+    decades = number % 10;
     number /= 10;
-    d = number;
-    return c * 100 + d * 10 + b;
+    hundred = number;
+    return decades * 100 + hundred * 10 + unit;
 }
 
 int main(int argc, const char **argv) {

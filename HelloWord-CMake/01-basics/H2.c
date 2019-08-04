@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * Переставляет десятки и единицы в числе
+ * @param number - входной параметр трехзначное число
+ * @return число с переставленными десятками и единицами в числе
+ */
 int permutation(int number) {
     int b, c, d;
     b = number % 10;
