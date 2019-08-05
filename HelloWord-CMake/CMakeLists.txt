@@ -5,7 +5,7 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED TRUE)
 
 if("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC")
-	add_compile_options(/W4 /WX /D_CRT_SECURE_NO_WARNINGS)
+	add_compile_options(/W4 /D_CRT_SECURE_NO_WARNINGS)
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
 	add_compile_options(-Weverything -Werror)
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
@@ -16,3 +16,4 @@ endif()
 # comment
 add_subdirectory(01-basics)
 add_subdirectory(02-functions)
+add_subdirectory(03-struct)
