@@ -1,5 +1,4 @@
-#include "iostream.h"
-#include "math.h"
+#include <math.h>
 
 double factorial(double n) {
     if(n == 1 || n == 0) return 1;
@@ -8,7 +7,7 @@ double factorial(double n) {
     }
 }
 
-double exp (double x)
+double my_exp (const double x, const int countElements)
 {
     double s=1;  // сумма ряда
     double n=1; // нач. n

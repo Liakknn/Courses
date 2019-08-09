@@ -18,12 +18,30 @@ struct Person* newPerson(const char* const lastName,
 	person->birthDay = birthDay;
 	person->birthMonth = birthMonth;
 	person->birthYear = birthYear;
-
+	person->id = rand();
+    return person;
 }
 
+//unsigned int getId() {
+//    return ++lastId;
+//}
+
+void printPerson(const struct Person *const person) {
+    printf("%d\n", person->id);
+    printf("%d.%d.%d\n", person->birthDay, person->birthMonth, person->birthYear);
+    printf("%s %s %s\n", person->lastName, person->firstName, person->middleName);
+}
 
 struct Person* getPersonByID(FILE* f, int id) {
-	
+    struct Person *const person = (struct Person *) malloc(sizeof(struct Person));
+    for (int i = 0; i < getPersonCount(f); ++i) {
+        fseek(f, i * sizeof(struct Person), SEEK_SET);
+        fread(person, sizeof(struct Person), 1, f);
+        if (person->id == id) {
+            return person;
+        }
+    }
+    return NULL;
 }
 
 struct Person* getPersonByIndex(FILE* f, const int index) {
@@ -43,6 +61,15 @@ void addPerson(FILE* f, const struct Person* const person) {
 	fwrite(person, sizeof(struct Person), 1, f);
 }
 
-void removePerson(FILE* f, int const id) {
-
+void removePerson(FILE** f, int const id) {
+    fseek(f, 0, SEEK_END);
+    long sizeFile = ftell(f);
+    struct Person* person[sizeFile];
+    *person = malloc(sizeof(*f));
+    *person = fread(person, sizeof(struct Person), getPersonCount(f), f);
+    fclose(f);
+    fopen(f, "w");
+    for(int i = 0; i < getPersonCount(person); i++) {
+        if()
+    }
 }

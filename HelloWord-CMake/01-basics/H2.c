@@ -3,17 +3,24 @@
 
 /**
  * Переставляет десятки и единицы в числе
- * @param number - входной параметр трехзначное число
+ * @param number трехзначное число
  * @return число с переставленными десятками и единицами в числе
  */
 int permutation(int number) {
-    int b, c, d;
-    b = number % 10;
-    number /= 10;
-    c = number % 10;
-    number /= 10;
-    d = number;
-    return d * 100 + b * 10 + c;
+    int count = 0;
+    while (number > 0) {
+        number /= 10;
+        ++count;
+    }
+    if (count == 3) {
+        const int unit = number % 10;
+        number /= 10;
+        const int decades = number % 10;
+        number /= 10;
+        const int hundred = number;
+        return d * 100 + b * 10 + c;
+    }
+    return number;
 }
 
 int main(int argc, const char **argv) {

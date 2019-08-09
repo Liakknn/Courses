@@ -82,7 +82,6 @@ void printF(const char *format, ...) {
            print_int(va_arg(args, char));
            ++i;
        } */
-
         if (format[i] == '%' && isdigit(format[i + 1]) && format[i + 2] == 'f') {
             print_double(va_arg(args, double), '0' + format[i + 1]);
         } else {

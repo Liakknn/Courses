@@ -3,7 +3,6 @@
 #include <stdlib.h>
 
 int main(int argc, const char **argv) {
-    system("chcp 65001");
     double a;
     double b;
     double c;

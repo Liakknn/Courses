@@ -3,7 +3,7 @@
 
 /**
  * Вычисляет количество дней в году.
- * @param year - входной параметр год
+ * @param year год
  * @return количество дней
  */
 int countDays(int year) {

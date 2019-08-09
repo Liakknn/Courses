@@ -1,27 +1,31 @@
 #include <stdio.h>
-#include <windows.h>
 #include <stdlib.h>
 
 /**
  * Переставляет сотни и десятки в числе.
- * Возвращает число с переставленными сотнями и десятками.
- * @param unit - цифра единиц в трехзначном числе
- * @param decades - цифра десятков в трехзначном числе
- * @param hundred - цифра сотен в трехзначном числе
- * @param number - принимаемое число
+ * @param number принимаемое число
+ * @return возвращает число с переставленными сотнями и десятками.
  */
-int permutation(int number) {
-    int unit, decades, hundred;
-    unit = number % 10;
-    number /= 10;
-    decades = number % 10;
-    number /= 10;
-    hundred = number;
-    return decades * 100 + hundred * 10 + unit;
+int permutationOfHundreadAndTensInNumber(int number) {
+    int count = 0;
+    while (number > 0) {
+        number /= 10;
+        ++count;
+    }
+    if (count == 3) {
+        const int unit = number % 10;
+        number /= 10;
+        const int decades = number % 10;
+        number /= 10;
+        const int hundred = number;
+        return decades * 100 + hundred * 10 + unit;
+    }
+    else {
+        return number;
+    }
 }
 
 int main(int argc, const char **argv) {
-    system("chcp 65001");
     int a;
     if (argc == 2) {
         a = atof(argv[1]);
@@ -29,5 +33,5 @@ int main(int argc, const char **argv) {
         puts("Введите трехзначное число: ");
         scanf("%i", &a);
     }
-    printf("%i\n", permutation(a));
+    printf("%i\n", permutationOfHundreadAndTensInNumber(a));
 }

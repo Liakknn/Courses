@@ -7,6 +7,10 @@ int main() {
 	FILE* f = fopen("data", "w+");
 	addPerson(f, person1);
 	addPerson(f, person2);
+	printPerson(person1);
+	struct Person* p3=getPersonByID(f,person1->id);
+	printPerson(p3);
+	removePerson(f,person1->id);
 	fclose(f);
 	free(person1);
 	free(person2);
