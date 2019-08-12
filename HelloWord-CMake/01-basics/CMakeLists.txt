@@ -13,6 +13,6 @@
 #add_executable(H5 "H5.c")
 #add_executable(H7 "H7.c")
 #add_executable(GCD "GCD.c")
-add_executable(STR "STR.c")
+#add_executable(STR "STR.c")
 
 
