@@ -22,3 +22,24 @@ void vector_print(const struct Vector* vector) {
 	}
 	printf("\n");
 }
+
+int firstIndexOf(const struct Vector* vector, float n) {
+    for (size_t i = 0; i < vector->size; ++i) {
+        if(vector->data[i] == n) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int lastIndexOf(const struct Vector* vector, float n) {
+    int index = -1;
+    for(size_t i = 0; i < vector->size; ++i) {
+        if(vector->data[i] == n) {
+            index = i;
+        }
+    }
+    return index;
+}
+
+

@@ -16,3 +16,10 @@ void vector_init(struct Vector* vector, size_t n);
 
 void vector_print(const struct Vector* vector);
 
+int firstIndexOf(const struct Vector* vector, float n);
+
+int lastIndexOf(const struct Vector* vector, float n);
+
+//void insert(struct Vector* vector, float n);
+
+//void remove(struct Vector* vector, float n);
