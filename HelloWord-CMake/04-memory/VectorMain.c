@@ -22,6 +22,8 @@ int main() {
 	vector_print(v4);
 	vector_print(v4 + 1);
 	vector_print(v4 + 2);
-	printf("%i", firstIndexOf(&v3, 5.0));
-	printf("%i", lastIndexOf(&v4, 8.0));
+	printf("%i\n", firstIndexOf(v3, 5.00));
+	printf("%i\n", lastIndexOf(v4, 8.00));
+	insert(v3 + 1,1, 2.00);
+	vector_print(v4);
 }

@@ -20,6 +20,6 @@ int firstIndexOf(const struct Vector* vector, float n);
 
 int lastIndexOf(const struct Vector* vector, float n);
 
-//void insert(struct Vector* vector, float n);
+void insert(struct Vector* vector, size_t index, float n);
 
 //void remove(struct Vector* vector, float n);
