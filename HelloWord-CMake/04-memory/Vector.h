@@ -1,4 +1,8 @@
 #include<stdlib.h>
+#include <stdbool.h>
+
+typedef bool (*predicate) (float);
+
 /** —труктура дл€ работы с динамическим массивом float
 */
 struct Vector {
@@ -16,10 +20,10 @@ void vector_init(struct Vector* vector, size_t n);
 
 void vector_print(const struct Vector* vector);
 
-int firstIndexOf(const struct Vector* vector, float n);
+int firstIndexOf(const struct Vector* vector, predicate p);
 
-int lastIndexOf(const struct Vector* vector, float n);
+int lastIndexOf(const struct Vector* vector, predicate p);
 
 void insert(struct Vector* vector, size_t index, float n);
 
-//void remove(struct Vector* vector, float n);
+void remove_element(struct Vector* vector, size_t index);

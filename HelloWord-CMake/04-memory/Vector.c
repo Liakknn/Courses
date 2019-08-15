@@ -23,53 +23,57 @@ void vector_print(const struct Vector *vector) {
     printf("\n");
 }
 
-int firstIndexOf(const struct Vector *vector, float n) {
-    for (size_t i = 0; i < vector->size; ++i) {
-        if (vector->data[i] == n) {
+int firstIndexOf(const struct Vector *vector, predicate p) {
+    for (int i = 0; i < vector->size; ++i) {
+        if (p(vector->data[i])) {
             return i;
         }
     }
     return -1;
 }
 
-int lastIndexOf(const struct Vector *vector, float n) {
+int lastIndexOf(const struct Vector *vector, predicate p) {
     int index = -1;
-    for (size_t i = 0; i < vector->size; ++i) {
-        if (vector->data[i] == n) {
+    for (int i = 0; i < vector->size; ++i) {
+        if (p(vector->data[i])) {
             index = i;
         }
     }
     return index;
 }
 
-void insert(struct Vector *vector, size_t index, float n) {
-    if (index > vector->size) {
-        return;
-    }
-    if(vector->size < vector->capacity) {
-        vector->size++;
-        for(size_t i = index; i < vector->size; ++i) {
-            vector->data[i + 1] = vector->data[i];
-        }
-        vector->data[index] = n;
-    }
-    float mas[vector->size + 1];
-    for (size_t i = 0; i < index; ++i) {
-        mas[i] = vector->data[i];
-    }
-    mas[index] = n;
-    for (size_t i = index; i < vector->size; ++i) {
-        mas[i + 1] = vector->data[i];
-    }
-    if (vector->capacity == vector->size) {
-        free(vector->data);
-        vector->data = malloc(sizeof(float) * vector->capacity * 2);
-    }
-    for (size_t i = 0; i <= vector->size; ++i) {
-        vector->data[i] = mas[i];
-    }
-    vector->size += 1;
-    vector->capacity *= 2;
+void insert(struct Vector* vector, size_t index, float n) {
+	if (index > vector->size) {
+		return;
+	}
+	if (vector->size < vector->capacity) {
+		vector->size++;
+		for (size_t i = vector->size; i > index; i--) {
+			vector->data[i] = vector->data[i - 1];
+		}
+		vector->data[index] = n;
+	} else {
+		float* tmp = malloc(sizeof(float) * vector->capacity * 2);
+		for (size_t i = 0; i < index; ++i) {
+			tmp[i] = vector->data[i];
+		}
+		tmp[index] = n;
+		for (size_t i = index; i < vector->size; ++i) {
+			tmp[i + 1] = vector->data[i];
+		}
+		free(vector->data);
+		vector->data = tmp;
+		vector->size += 1;
+		vector->capacity *= 2;
+	}
+}
+
+void remove_element(struct Vector* vector, size_t index) {
+	if (index > vector->size) { return; }
+	for (size_t i = index; i < vector->size; ++i) {
+		vector->data[i] = vector->data[i + 1];
+	}
+	vector->size--;
 }
 
 

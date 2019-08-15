@@ -1,6 +1,14 @@
 #include "Vector.h"
 #include <stdio.h>
 
+bool is_even(float number) {	
+	return (int)number % 2 == 0;
+}
+
+bool is_odd(float number) {
+	return (int)number % 2;
+}
+
 int main() {
 	struct Vector v1;
 	struct Vector v2[3];
@@ -22,8 +30,10 @@ int main() {
 	vector_print(v4);
 	vector_print(v4 + 1);
 	vector_print(v4 + 2);
-	printf("%i\n", firstIndexOf(v3, 5.00));
-	printf("%i\n", lastIndexOf(v4, 8.00));
-	insert(v3 + 1,1, 2.00);
-	vector_print(v4);
+	printf("%i\n", firstIndexOf(v3, is_odd));
+	printf("%i\n", lastIndexOf(v4, is_even));
+	insert(&v1 ,1, 2.00);
+	vector_print(&v1);
+	remove_element(v4 + 1, 0);
+	vector_print(v4 + 1);
 }
