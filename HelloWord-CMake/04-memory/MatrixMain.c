@@ -8,4 +8,6 @@ int main() {
 	struct Matrix* mR = CreateMatrix(ROW, 2, 3);
 	SetMatrixValue(mR, 0, 1, 2.0f);
 	printf("%.2f", GetMatrixValue(mR, 0, 1));
+    FILE* f = fopen("test.txt", "rw");
+    PrintMatrix(mR, f);
 }
