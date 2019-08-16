@@ -77,11 +77,9 @@ void PrintMatrix(struct Matrix *matrix, FILE *file) {
     } else {
         for (size_t i = 0; i < matrix->rows; ++i) {
             for (size_t j = 0; j < matrix->cols; ++j) {
-                fprintf(file, "%.2f", GetMatrixValue(matrix, i, j));
-                if (j == matrix->cols - 1) {
-                    printf("\n");
-                }
+                fprintf(file, "%.2f ", GetMatrixValue(matrix, i, j));
             }
+            printf("\n");
         }
     }
 }
@@ -90,6 +88,9 @@ void DestroyMatrix(struct Matrix *matrix) {
     switch (matrix->type) {
         case FLAT: {
             free(matrix->data);
+            matrix->rows = 0;
+            matrix->cols = 0;
+            free(matrix);
             break;
         }
         case ROW: {
@@ -97,6 +98,9 @@ void DestroyMatrix(struct Matrix *matrix) {
             for (size_t i = 0; i < matrix->rows; ++i) {
                 free(data[i]);
             }
+            matrix->rows = 0;
+            matrix->cols = 0;
+            free(matrix);
             break;
         }
         case COLUMN: {
@@ -104,6 +108,9 @@ void DestroyMatrix(struct Matrix *matrix) {
             for (size_t i = 0; i < matrix->cols; ++i) {
                 free(data[i]);
             }
+            matrix->rows = 0;
+            matrix->cols = 0;
+            free(matrix);
             break;
         }
     }

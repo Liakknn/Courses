@@ -7,7 +7,6 @@ int main() {
 	printf("%.2f\n", GetMatrixValue(m, 0, 0));
 	struct Matrix* mR = CreateMatrix(ROW, 2, 3);
 	SetMatrixValue(mR, 0, 1, 2.0f);
-	printf("%.2f", GetMatrixValue(mR, 0, 1));
-    FILE* f = fopen("test.txt", "rw");
-    PrintMatrix(mR, f);
+	printf("%.2f\n", GetMatrixValue(mR, 0, 1));
+    PrintMatrix(mR, stdout);
 }
