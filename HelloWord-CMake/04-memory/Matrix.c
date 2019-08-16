@@ -97,12 +97,14 @@ void DestroyMatrix(struct Matrix *matrix) {
             for (size_t i = 0; i < matrix->rows; ++i) {
                 free(data[i]);
             }
+            break;
         }
         case COLUMN: {
             float **data = (float **) matrix->data;
             for (size_t i = 0; i < matrix->cols; ++i) {
                 free(data[i]);
             }
+            break;
         }
     }
 }
