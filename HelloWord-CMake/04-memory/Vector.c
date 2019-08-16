@@ -24,7 +24,7 @@ void vector_print(const struct Vector *vector) {
 }
 
 int firstIndexOf(const struct Vector *vector, predicate p) {
-    for (int i = 0; i < vector->size; ++i) {
+    for (size_t i = 0; i < vector->size; ++i) {
         if (p(vector->data[i])) {
             return i;
         }
@@ -34,7 +34,7 @@ int firstIndexOf(const struct Vector *vector, predicate p) {
 
 int lastIndexOf(const struct Vector *vector, predicate p) {
     int index = -1;
-    for (int i = 0; i < vector->size; ++i) {
+    for (size_t i = 0; i < vector->size; ++i) {
         if (p(vector->data[i])) {
             index = i;
         }
