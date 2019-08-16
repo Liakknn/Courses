@@ -40,14 +40,14 @@ void SetMatrixValue(struct Matrix *matrix, size_t row, size_t col, float value) 
             break;
         }
         case ROW: {
-            float **dataRow = (float **) matrix->data;
-            float *dataCol = (float *) dataRow[row];
-            dataCol[col] = value;
+            float **dataRows = (float **) matrix->data;
+            float *dataRow = (float *) dataRows[row];
+            dataRow[col] = value;
         }
         case COLUMN: {
-            float **dataCol = (float **) matrix->data;
-            float *dataRow = (float *) dataCol[col];
-            dataRow[row] = value;
+            float **dataCols = (float **) matrix->data;
+            float *dataCol = (float *) dataCols[col];
+            dataCol[row] = value;
         }
     }
 }
@@ -59,20 +59,50 @@ float GetMatrixValue(struct Matrix *matrix, size_t row, size_t col) {
             return data[row * matrix->cols + col];
         }
         case ROW: {
-            float **dataRow = (float **) matrix->data;
-            float *dataCol = (float *) dataRow[row];
-            return dataCol[col];
+            float **dataRows = (float **) matrix->data;
+            float *dataRow = (float *) dataRows[row];
+            return dataRow[col];
         }
-        case COLUMN:
-        {
-
-            float **dataCol = (float **) matrix->data;
-            float *dataRow = (float *) dataCol[col];
-            return dataRow[row];
+        case COLUMN: {
+            float **dataCols = (float **) matrix->data;
+            float *dataCol = (float *) dataCols[col];
+            return dataCol[row];
         }
     }
 }
 
-void PrintMatrix(struct Matrix *matrix) {
+void PrintMatrix(struct Matrix *matrix, FILE *file) {
+    if (file == NULL) {
+        return;
+    } else {
+        for (size_t i = 0; i < matrix->rows; ++i) {
+            for (size_t j = 0; j < matrix->cols; ++j) {
+                fprintf(file, "%.2f", GetMatrixValue(matrix, i, j));
+                if (j == matrix->cols - 1) {
+                    printf("\n");
+                }
+            }
+        }
+    }
+}
 
+void DestroyMatrix(struct Matrix *matrix) {
+    switch (matrix->type) {
+        case FLAT: {
+            free(matrix->data);
+            break;
+        }
+        case ROW: {
+            float **data = (float **) matrix->data;
+            for (size_t i = 0; i < matrix->rows; ++i) {
+                free(data[i]);
+            }
+        }
+        case COLUMN: {
+            float **data = (float **) matrix->data;
+            for (size_t i = 0; i < matrix->cols; ++i) {
+                free(data[i]);
+            }
+        }
+    }
 }

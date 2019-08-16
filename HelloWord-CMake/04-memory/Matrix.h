@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 enum Type {
 	FLAT,
@@ -20,4 +21,6 @@ void SetMatrixValue(struct Matrix* matrix, size_t row, size_t col, float value);
 
 float GetMatrixValue(struct Matrix* matrix, size_t row, size_t col);
 
-void PrintMatrix(struct Matrix* matrix);
+void PrintMatrix(struct Matrix* matrix, FILE* file);
+
+void DestroyMatrix(struct Matrix* matrix);
