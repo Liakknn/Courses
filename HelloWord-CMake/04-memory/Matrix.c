@@ -43,11 +43,13 @@ void SetMatrixValue(struct Matrix *matrix, size_t row, size_t col, float value) 
             float **dataRows = (float **) matrix->data;
             float *dataRow = (float *) dataRows[row];
             dataRow[col] = value;
+            break;
         }
         case COLUMN: {
             float **dataCols = (float **) matrix->data;
             float *dataCol = (float *) dataCols[col];
             dataCol[row] = value;
+            break;
         }
     }
 }
@@ -88,8 +90,6 @@ void DestroyMatrix(struct Matrix *matrix) {
     switch (matrix->type) {
         case FLAT: {
             free(matrix->data);
-            matrix->rows = 0;
-            matrix->cols = 0;
             free(matrix);
             break;
         }
@@ -101,6 +101,7 @@ void DestroyMatrix(struct Matrix *matrix) {
             matrix->rows = 0;
             matrix->cols = 0;
             free(matrix);
+            free(data);
             break;
         }
         case COLUMN: {
@@ -111,7 +112,29 @@ void DestroyMatrix(struct Matrix *matrix) {
             matrix->rows = 0;
             matrix->cols = 0;
             free(matrix);
+            free(data);
             break;
         }
     }
 }
+
+void SwapRows(struct Matrix *matrix1, struct Matrix *matrix2, size_t indexRow1, size_t indexRow2) {
+    if(matrix1->rows != matrix2->rows || matrix1->cols != matrix2->cols) { return; }
+    if (matrix1->rows < indexRow1 || matrix2->rows < indexRow2) {
+        return;
+    } else if (matrix1->type == ROW && matrix2->type == ROW){
+        float** data1 = (float**) matrix1->data;
+        float** data2 = (float**) matrix2->data;
+        float* tmp = (float*) data2[indexRow2];
+        data2[indexRow2] = data1[indexRow1];
+        data1[indexRow1] = tmp;
+    }
+    else  {
+        for(size_t i = 0; i < matrix1->cols; ++i) {
+            float tmp = GetMatrixValue(matrix2, indexRow2, i);
+            SetMatrixValue(matrix2, indexRow2, i, GetMatrixValue(matrix1, indexRow1, i));
+            SetMatrixValue(matrix1, indexRow1, i, tmp);
+        }
+    }
+}
+

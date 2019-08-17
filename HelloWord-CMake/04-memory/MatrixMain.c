@@ -9,4 +9,31 @@ int main() {
 	SetMatrixValue(mR, 0, 1, 2.0f);
 	printf("%.2f\n", GetMatrixValue(mR, 0, 1));
     PrintMatrix(mR, stdout);
+    printf("\n");
+    //DestroyMatrix(m);
+    PrintMatrix(mR, stdout);
+    printf("\n");
+    PrintMatrix(m, stdout);
+    SwapRows(mR, m, 1, 0);
+    printf("\n");
+    PrintMatrix(mR, stdout);
+    printf("\n");
+    PrintMatrix(m, stdout);
+
+    struct Matrix* m1 = CreateMatrix(FLAT, 2, 3);
+    struct Matrix* mR1 = CreateMatrix(ROW, 2, 4);
+    SetMatrixValue(m1, 0, 1, 2.0f);
+    SwapRows(mR1, m1, 1, 0);
+    printf("\n");
+    PrintMatrix(m1, stdout);
+    struct Matrix* mC = CreateMatrix(COLUMN, 2, 3);
+    struct Matrix* mC1 = CreateMatrix(COLUMN, 2, 3);
+    SetMatrixValue(mC, 0, 1, 2.0f);
+    SetMatrixValue(mC, 0, 0, 2.0f);
+    PrintMatrix(mC, stdout);
+    SwapRows(mC1, mC, 1, 0);
+    printf("\n");
+    PrintMatrix(mC, stdout);
+    printf("\n");
+    PrintMatrix(mC1, stdout);
 }

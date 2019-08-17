@@ -11,7 +11,6 @@ int main() {
 	struct Person* p3=getPersonByID(f,person1->id);
 	printPerson(p3);
 	removePerson(f,person1->id);
-	fclose(f);
-	free(person1);
-	free(person2);
+	printPerson(person1);
+	printPerson(person2);
 }

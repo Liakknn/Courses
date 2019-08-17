@@ -24,3 +24,5 @@ float GetMatrixValue(struct Matrix* matrix, size_t row, size_t col);
 void PrintMatrix(struct Matrix* matrix, FILE* file);
 
 void DestroyMatrix(struct Matrix* matrix);
+
+void SwapRows(struct Matrix* matrix1, struct Matrix* matrix2, size_t indexRow1, size_t indexRow2);

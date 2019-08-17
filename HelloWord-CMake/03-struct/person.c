@@ -64,12 +64,13 @@ void addPerson(FILE* f, const struct Person* const person) {
 void removePerson(FILE** f, int const id) {
     fseek(f, 0, SEEK_END);
     long sizeFile = ftell(f);
-    struct Person* person[sizeFile];
-    *person = malloc(sizeof(*f));
-    *person = fread(person, sizeof(struct Person), getPersonCount(f), f);
+    struct Person* person = (struct Person*) malloc(sizeof(sizeFile));
+    fread(person, sizeof(struct Person), getPersonCount(f), f);
     fclose(f);
     fopen(f, "w");
-    for(int i = 0; i < getPersonCount(person); i++) {
-        if()
+    for(int i = 0; i < getPersonCount(person); ++i) {
+        if(person->id != id) {
+            addPerson(f, getPersonByID(person, person->id));
+        }
     }
 }
