@@ -8,7 +8,8 @@ int main() {
 	struct Matrix* mR = CreateMatrix(ROW, 2, 3);
 	SetMatrixValue(mR, 0, 1, 2.0f);
 	printf("%.2f\n", GetMatrixValue(mR, 0, 1));
-    PrintMatrix(mR, stdout);
+	FILE* f = fopen("test.txt", "w");
+    PrintMatrix(mR, f);
     printf("\n");
     //DestroyMatrix(m);
     PrintMatrix(mR, stdout);

@@ -18,7 +18,7 @@ struct Person* newPerson(const char* const lastName,
 	person->birthDay = birthDay;
 	person->birthMonth = birthMonth;
 	person->birthYear = birthYear;
-	person->id = rand();
+	person->id = 0;
     return person;
 }
 
@@ -27,17 +27,28 @@ struct Person* newPerson(const char* const lastName,
 //}
 
 void printPerson(const struct Person *const person) {
-    printf("%d\n", person->id);
-    printf("%d.%d.%d\n", person->birthDay, person->birthMonth, person->birthYear);
-    printf("%s %s %s\n", person->lastName, person->firstName, person->middleName);
+    printf("ID:%d\n", person->id);
+    printf("Birthday: %d.%d.%d\n", person->birthDay, person->birthMonth, person->birthYear);
+    printf("Last Name: %s\nFirst Name: %s\nMiddle Name: %s\n", person->lastName, person->firstName, person->middleName);
+}
+
+void printPersonBriefly(const struct Person* const person) {
+    printf("%d ", person->id);
+    printf("%s ", person->lastName);
+    putchar(person->firstName[0]);
+    printf(". ");
+    putchar(person->middleName[0]);
+    printf(".");
 }
 
 struct Person* getPersonByID(FILE* f, int id) {
     struct Person *const person = (struct Person *) malloc(sizeof(struct Person));
-    for (int i = 0; i < getPersonCount(f); ++i) {
+    size_t count = getPersonCount(f);
+    for (size_t i = 0; i < count; ++i) {
         fseek(f, i * sizeof(struct Person), SEEK_SET);
         fread(person, sizeof(struct Person), 1, f);
         if (person->id == id) {
+            free(id);
             return person;
         }
     }
@@ -56,21 +67,23 @@ int getPersonCount(FILE* f) {
 	return ftell(f) / sizeof(struct Person);
 }
 
-void addPerson(FILE* f, const struct Person* const person) {
+void addPerson(FILE* f, struct Person* const person) {
+    person->id = lastId + 1;
 	fseek(f, 0, SEEK_END);
 	fwrite(person, sizeof(struct Person), 1, f);
 }
 
 void removePerson(FILE** f, int const id) {
     fseek(f, 0, SEEK_END);
-    long sizeFile = ftell(f);
-    struct Person* person = (struct Person*) malloc(sizeof(sizeFile));
-    fread(person, sizeof(struct Person), getPersonCount(f), f);
+    size_t count = getPersonCount(f);
+    struct Person* person = (struct Person*) malloc(count * sizeof(struct Person*));
+    fread(person, sizeof(struct Person), count, f);
     fclose(f);
-    fopen(f, "w");
-    for(int i = 0; i < getPersonCount(person); ++i) {
+    fopen(f, "w+");
+    for(int i = 0; i < count; ++i) {
+        fseek(f, i * sizeof(struct Person), SEEK_SET);
         if(person->id != id) {
-            addPerson(f, getPersonByID(person, person->id));
+            fread(f, sizeof(struct Person), 1, person);
         }
     }
 }

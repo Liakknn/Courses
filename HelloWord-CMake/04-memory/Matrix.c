@@ -81,7 +81,7 @@ void PrintMatrix(struct Matrix *matrix, FILE *file) {
             for (size_t j = 0; j < matrix->cols; ++j) {
                 fprintf(file, "%.2f ", GetMatrixValue(matrix, i, j));
             }
-            printf("\n");
+            fprintf(file, "\n");
         }
     }
 }
@@ -90,7 +90,6 @@ void DestroyMatrix(struct Matrix *matrix) {
     switch (matrix->type) {
         case FLAT: {
             free(matrix->data);
-            free(matrix);
             break;
         }
         case ROW: {
@@ -98,9 +97,6 @@ void DestroyMatrix(struct Matrix *matrix) {
             for (size_t i = 0; i < matrix->rows; ++i) {
                 free(data[i]);
             }
-            matrix->rows = 0;
-            matrix->cols = 0;
-            free(matrix);
             free(data);
             break;
         }
@@ -109,18 +105,16 @@ void DestroyMatrix(struct Matrix *matrix) {
             for (size_t i = 0; i < matrix->cols; ++i) {
                 free(data[i]);
             }
-            matrix->rows = 0;
-            matrix->cols = 0;
-            free(matrix);
             free(data);
             break;
         }
     }
+    free(matrix);
 }
 
 void SwapRows(struct Matrix *matrix1, struct Matrix *matrix2, size_t indexRow1, size_t indexRow2) {
-    if(matrix1->rows != matrix2->rows || matrix1->cols != matrix2->cols) { return; }
-    if (matrix1->rows < indexRow1 || matrix2->rows < indexRow2) {
+    if(matrix1->cols != matrix2->cols) { return; }
+    if (indexRow1 >= matrix1->rows || indexRow2 >= matrix2->rows) {
         return;
     } else if (matrix1->type == ROW && matrix2->type == ROW){
         float** data1 = (float**) matrix1->data;

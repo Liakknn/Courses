@@ -3,7 +3,7 @@
 
 #define MAX_NAME_LENGTH 32
 
-//unsigned int lastId = 0;
+unsigned int lastId = 0;
 
 struct Person {
 	int id;
@@ -27,6 +27,7 @@ struct Person* getPersonByID(FILE* f, int id);
 void printPerson(const struct Person *const person);
 struct Person* getPersonByIndex(FILE* f, int number);
 int getPersonCount(FILE* f);
-void addPerson(FILE* f, const struct Person* person);
+void addPerson(FILE* f, struct Person* person);
 void removePerson(FILE** f, int id);
+void printPersonBriefly(const struct Person* const person);
 //unsigned int getId();
