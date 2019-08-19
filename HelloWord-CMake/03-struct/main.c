@@ -2,16 +2,22 @@
 #include <stdlib.h>
 
 int main() {
+
 	struct Person* person1 = newPerson("Ivanov", "Danila", "Aleksandrovich", 23, 5, 2000);
 	struct Person* person2 = newPerson("Alekseeva", "Elizaveta", "Alekseevna", 23, 5, 2000);
-	FILE* f = fopen("data", "w+");
-	addPerson(f, person1);
-	addPerson(f, person2);
+	struct DataBase* dataBase = openDataBase("data");
+	addPerson(dataBase, person1);
+	addPerson(dataBase, person2);
 	printPerson(person1);
-	struct Person* p3=getPersonByID(f,person1->id);
+	struct Person* p3=getPersonByID(dataBase, person1->id);
 	printPerson(p3);
 	//removePerson(f,person1->id);
 	printPerson(person1);
 	printPerson(person2);
 	printPersonBriefly(person2);
+	removePerson(dataBase, 1);
+	closeDataBase(dataBase);
+	printPerson(person1);
+	int size = sizeof(struct Person);
+	printf("%i", size);
 }

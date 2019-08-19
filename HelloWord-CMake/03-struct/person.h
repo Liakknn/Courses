@@ -3,8 +3,6 @@
 
 #define MAX_NAME_LENGTH 32
 
-unsigned int lastId = 0;
-
 struct Person {
 	int id;
 	char lastName[MAX_NAME_LENGTH];
@@ -15,6 +13,8 @@ struct Person {
 	unsigned int birthYear;
 };
 
+struct DataBase;
+
 struct Person* newPerson(
 	const char* const lastName,
 	const char* const firstName,
@@ -23,11 +23,12 @@ struct Person* newPerson(
 	const unsigned char birthMonth,
 	const unsigned int birthYear);
 
-struct Person* getPersonByID(FILE* f, int id);
+struct Person* getPersonByID(struct DataBase* dataBase, int id);
 void printPerson(const struct Person *const person);
-struct Person* getPersonByIndex(FILE* f, int number);
-int getPersonCount(FILE* f);
-void addPerson(FILE* f, struct Person* person);
-void removePerson(FILE** f, int id);
+struct Person* getPersonByIndex(struct DataBase* dataBase, int number);
+int getPersonCount(struct DataBase* dataBase);
+void addPerson(struct DataBase* dataBase, struct Person* person);
+void removePerson(struct DataBase* dataBase, int id);
 void printPersonBriefly(const struct Person* const person);
-//unsigned int getId();
+struct DataBase* openDataBase(const char* pathToFile);
+void closeDataBase(struct DataBase* dataBase);
