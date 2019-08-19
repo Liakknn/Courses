@@ -75,15 +75,15 @@ void addPerson(FILE* f, struct Person* const person) {
 
 void removePerson(FILE** f, int const id) {
     fseek(f, 0, SEEK_END);
-    size_t count = getPersonCount(f);
-    struct Person* person = (struct Person*) malloc(count * sizeof(struct Person*));
+    size_t size = ftell(f);
+    struct Person* person = (struct Person*) malloc(size);
+    size_t count = size / sizeof(struct Person*);
     fread(person, sizeof(struct Person), count, f);
     fclose(f);
     fopen(f, "w+");
-    for(int i = 0; i < count; ++i) {
-        fseek(f, i * sizeof(struct Person), SEEK_SET);
-        if(person->id != id) {
-            fread(f, sizeof(struct Person), 1, person);
+    for(struct Person* p = person; p < person + count; ++p) {
+        if (p->id != id) {
+            fwrite(p, sizeof(struct Person *), 1, f);
         }
     }
 }
