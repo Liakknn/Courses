@@ -27,26 +27,14 @@ struct Person* newPerson(const char* const lastName,
     return person;
 }
 
-//unsigned int getId() {
-//    return ++lastId;
-//}
-
-void printPerson(const struct Person *const person) {
+void printPerson(const struct DataBase* const dataBase, const int id) {
+    struct Person* person = getPersonByID(dataBase, id);
     printf("ID:%d\n", person->id);
     printf("Birthday: %d.%d.%d\n", person->birthDay, person->birthMonth, person->birthYear);
     printf("Last Name: %s\nFirst Name: %s\nMiddle Name: %s\n", person->lastName, person->firstName, person->middleName);
 }
 
-void printPersonBriefly(const struct Person* const person) {
-    printf("%d ", person->id);
-    printf("%s ", person->lastName);
-    putchar(person->firstName[0]);
-    printf(". ");
-    putchar(person->middleName[0]);
-    printf(".\n");
-}
-
-struct Person* getPersonByID(struct DataBase* dataBase, int id) {
+struct Person* getPersonByID(const struct DataBase* const dataBase, const int id) {
     struct Person *const person = (struct Person *) malloc(sizeof(struct Person));
     size_t count = getPersonCount(dataBase);
     for (size_t i = 0; i < count; ++i) {
@@ -61,9 +49,7 @@ struct Person* getPersonByID(struct DataBase* dataBase, int id) {
 }
 
 struct Person* getPersonByIndex(struct DataBase* dataBase, const int index) {
-    fseek(dataBase->file, 0, SEEK_END);
-    size_t count = ftell(dataBase->file) / sizeof(struct Person);
-    if((size_t )index >= count) {
+    if((index >= getPersonCount(dataBase))) {
         return NULL;
     }
 	struct Person* const person = (struct Person*)malloc(sizeof(*person));
@@ -72,14 +58,13 @@ struct Person* getPersonByIndex(struct DataBase* dataBase, const int index) {
 	return person;
 }
 
-int getPersonCount(struct DataBase* dataBase) {
+int getPersonCount(const struct DataBase* const dataBase) {
 	fseek(dataBase->file, 0, SEEK_END);
 	return ftell(dataBase->file) / sizeof(struct Person);
 }
 
 int maxId(struct DataBase* dataBase) {
     size_t maxId = 0;
-    fseek(dataBase->file, 0, SEEK_END);
     size_t count = getPersonCount(dataBase);
     struct Person *const person = (struct Person *) malloc(sizeof(struct Person));
     for (size_t i = 0; i < count; ++i) {
@@ -129,4 +114,17 @@ void closeDataBase(struct DataBase* dataBase) {
     fclose(dataBase->file);
     free(dataBase->pathToFile);
     free(dataBase);
+}
+
+void printPersonBriefly(struct DataBase* dataBase) {
+    size_t count = getPersonCount(dataBase);
+    for(size_t i = 0; i < count; ++i) {
+        struct Person* person = getPersonByIndex(dataBase, i);
+        printf("%d ", person->id);
+        printf("%s ", person->lastName);
+        putchar(person->firstName[0]);
+        printf(". ");
+        putchar(person->middleName[0]);
+        printf(".\n");
+    }
 }
