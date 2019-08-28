@@ -37,4 +37,10 @@ int main() {
     PrintMatrix(mC, stdout);
     printf("\n");
     PrintMatrix(mC1, stdout);
+    free(m);
+    free(mR);
+    free(m1);
+    free(mC);
+    free(mC1);
+    free(mR1);
 }

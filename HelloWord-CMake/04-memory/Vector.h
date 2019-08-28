@@ -20,6 +20,12 @@ struct Vector {
 void vector_init(struct Vector* vector, size_t n);
 
 /**
+ * Освобождает память, выделенную под vector
+ * @param vector указатель на vector
+ */
+void vector_free(struct Vector* vector);
+
+/**
  * Печатает на консоль vector
  * @param vector указатель на vector
  */

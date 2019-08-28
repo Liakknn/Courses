@@ -16,6 +16,11 @@ void vector_init(struct Vector *vector, size_t n) {
     }
 }
 
+void vector_free(struct Vector* vector) {
+    free(vector->data);
+    free(vector);
+}
+
 void vector_print(const struct Vector *vector) {
     for (size_t i = 0; i < vector->size; ++i) {
         printf("%.2f ", vector->data[i]);
@@ -63,6 +68,7 @@ void insert(struct Vector* vector, size_t index, float n) {
 		}
 		free(vector->data);
 		vector->data = tmp;
+		free(tmp);
 		vector->size += 1;
 		vector->capacity *= 2;
 	}

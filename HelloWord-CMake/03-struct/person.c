@@ -36,7 +36,7 @@ void printPerson(const struct DataBase* const dataBase, const int id) {
 
 struct Person* getPersonByID(const struct DataBase* const dataBase, const int id) {
     struct Person *const person = (struct Person *) malloc(sizeof(struct Person));
-    int count = getPersonCount(dataBase);
+    size_t count = getPersonCount(dataBase);
     for (size_t i = 0; i < count; ++i) {
         fseek(dataBase->file, i * sizeof(struct Person), SEEK_SET);
         fread(person, sizeof(struct Person), 1, dataBase->file);
@@ -93,7 +93,6 @@ void removePerson(struct DataBase* dataBase, int const id) {
     fread(person, sizeof(struct Person), count, dataBase->file);
     fclose(dataBase->file);
     dataBase->file = freopen(dataBase->pathToFile, "w+", dataBase->file);
-    perror("");
     for(struct Person* p = person; p < person + count; ++p) {
         if (p->id != id) {
             fwrite(p, sizeof(struct Person), 1, dataBase->file);
