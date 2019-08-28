@@ -48,7 +48,7 @@ int main() {
                 printf("¬ведите год рождени€: ");
                 int birthY;
                 scanf("%d", &birthY);
-                struct Person* p = newPerson(F, I, O, (unsigned char) birthD, (unsigned char) birthM, (int) birthY);
+                struct Person* p = newPerson(F, I, O, (unsigned char) birthD, (unsigned char) birthM, birthY);
                 addPerson(dataBase, p);
                 free(p);
                 break;

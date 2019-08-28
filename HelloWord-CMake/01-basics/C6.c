@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
  * Вычисление факториала.
@@ -34,7 +35,7 @@ int main(int argc, const char **argv) {
     int countElements;
     if (argc == 3) {
         x = atof(argv[1]);
-        countElements = atof(argv[2]);
+        countElements = atoi(argv[2]);
     } else {
         puts("Введите значение x и количество элементов");
         scanf("%lf %i", &x, &countElements);

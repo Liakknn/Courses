@@ -36,7 +36,7 @@ void printPerson(const struct DataBase* const dataBase, const int id) {
 
 struct Person* getPersonByID(const struct DataBase* const dataBase, const int id) {
     struct Person *const person = (struct Person *) malloc(sizeof(struct Person));
-    size_t count = getPersonCount(dataBase);
+    int count = getPersonCount(dataBase);
     for (size_t i = 0; i < count; ++i) {
         fseek(dataBase->file, i * sizeof(struct Person), SEEK_SET);
         fread(person, sizeof(struct Person), 1, dataBase->file);
@@ -65,13 +65,13 @@ int getPersonCount(const struct DataBase* const dataBase) {
 
 int maxId(struct DataBase* dataBase) {
     size_t maxId = 0;
-    size_t count = getPersonCount(dataBase);
+    size_t count = (size_t) getPersonCount(dataBase);
     struct Person *const person = (struct Person *) malloc(sizeof(struct Person));
     for (size_t i = 0; i < count; ++i) {
         fseek(dataBase->file, i * sizeof(struct Person), SEEK_SET);
         fread(person, sizeof(struct Person), 1, dataBase->file);
         if ((size_t) person->id > maxId) {
-            maxId = person->id;
+            maxId = (size_t) person->id;
         }
     }
     free(person);
@@ -86,7 +86,7 @@ void addPerson(struct DataBase* dataBase, struct Person* const person) {
 
 void removePerson(struct DataBase* dataBase, int const id) {
     fseek(dataBase->file, 0, SEEK_END);
-    size_t size = ftell(dataBase->file);
+    size_t size = (size_t) ftell(dataBase->file);
     struct Person* person = (struct Person*) malloc(size);
     size_t count = size / sizeof(struct Person);
     fseek(dataBase->file, 0, SEEK_SET);
@@ -117,7 +117,7 @@ void closeDataBase(struct DataBase* dataBase) {
 }
 
 void printPersonBriefly(struct DataBase* dataBase) {
-    size_t count = getPersonCount(dataBase);
+    size_t count = (size_t) getPersonCount(dataBase);
     for(size_t i = 0; i < count; ++i) {
         struct Person* person = getPersonByIndex(dataBase, i);
         printf("%d ", person->id);
