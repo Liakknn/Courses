@@ -33,9 +33,11 @@ char *my_strncpy(char *dest, const char *src, size_t n) {
 
 int main() {
     char *str1 = "Hello";
-    char *str2 = "Liza";
+    char *str2[40];
     //printf("%d", my_strnlen(str1));
-    my_strcpy(str1, str2);
+    my_strcpy(str2, str1);
+    printf("%s", str2);
+    my_strncpy(str1, str2, 3);
     printf("%s", str1);
 }
 
