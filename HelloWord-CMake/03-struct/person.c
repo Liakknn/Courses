@@ -28,7 +28,7 @@ struct Person* newPerson(const char* const lastName,
 }
 
 void printPerson(const struct DataBase* const dataBase, const int id) {
-    struct Person* person = getPersonByID(dataBase, id);
+    struct Person* person = getPersonByID(dataBase, id); // TODO
     printf("ID:%d\n", person->id);
     printf("Birthday: %d.%d.%d\n", person->birthDay, person->birthMonth, person->birthYear);
     printf("Last Name: %s\nFirst Name: %s\nMiddle Name: %s\n", person->lastName, person->firstName, person->middleName);
