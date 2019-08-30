@@ -36,7 +36,7 @@ struct Person* getPersonByID(const struct DataBase* const dataBase, const int id
  * @param dataBase указатель на базу данных
  * @param id идентификатор человека
  */
-void printPerson(const struct DataBase *const dataBase,const  int id);
+void printPerson(const struct Person* person);
 
 /**
  * Получение человека по индексу

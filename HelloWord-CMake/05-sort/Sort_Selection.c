@@ -2,7 +2,7 @@
 
 int min(const int* data, int n) {
     int min = 0;
-    for(size_t i = 1; i < n; ++i) {
+    for(int i = 1; i < n; ++i) {
         if(data[i] < data[min]) {
             min = i;
         }

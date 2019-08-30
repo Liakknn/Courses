@@ -11,7 +11,9 @@ int main() {
     }
     printf("\n");
     int p4[] = {2, 1, 9, 6, 5};
-    sort_selection(p4, 5);
+    //sort_selection(p4, 5);
+    //sort_bubble(p4, 5);
+    sort_shaker(p4, 5);
     for(int i = 0; i < 5; ++i) {
         printf("%d ", p4[i]);
     }

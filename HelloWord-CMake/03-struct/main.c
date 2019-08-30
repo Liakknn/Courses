@@ -26,7 +26,7 @@ int main() {
                 printf("Введите ID:");
                 int id;
                 scanf("%d", &id);
-                printPerson(dataBase, id);
+                printPerson(getPersonByID(dataBase, id));
                 break;
             }
             case 2: {
