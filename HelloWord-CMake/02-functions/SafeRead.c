@@ -1,10 +1,83 @@
 #include <stdio.h>
-/*
-int read_int(const char* prompt, int min, int max) {
-    int size = sizeof(prompt)/ sizeof(prompt[0]);
-}*/
+#include <string.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <errno.h>
 
-int main(int argc, const char **argv) {
-    printf("Введите целые/вещественные числа");
+int read_int(const char *prompt, int min, int max) {
+    while (true) {
+        printf("%s", prompt);
+        char buf[16];
+        fgets(buf, sizeof(buf), stdin);
+        if (strchr(buf, '\n') == NULL) {
+            int ch;
+            bool flag = true;
+            while ((ch = fgetc(stdin)) != EOF) {
+                if (!isspace(ch)) {
+                    flag = false;
+                }
+            }
+            if (flag == false) {
+                printf("Введенная строка превышает допустимый размер!\n");
+                continue;
+            }
+            char *endptr = NULL;
+            errno = 0;
+            long l = strtol(buf, &endptr, 10);
+            if (buf == endptr) {
+                printf("Введенная строка - не число!\n");
+                continue;
+            }
+            for (char *p = endptr; *p != '\0'; ++p) {
+                if (!isspace(*p)) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (!flag) {
+                printf("Введенная строка  - не число!\n");
+            }
+            if (errno == ERANGE) {
+                printf("Строка выходит за допустимые пределы!\n");
+                continue;
+            }
+            if (l >= min && l <= max) {
+                return (int) l;
+            } else {
+                printf("Выход за границы диапазона, ожидаемые значения: min - %d, max - %d.\n", min, max);
+            }
+        }
+        char *endptr = NULL;
+        errno = 0;
+        int l = strtol(buf, &endptr, 10);
+        if (buf == endptr) {
+            printf("Введенная строка - не число!\n");
+            continue;
+        }
+        bool flag = true;
+        for (char *p = endptr; p != '\0'; ++p) {
+            if (!isspace(*p)) {
+                flag = false;
+                break;
+            }
+        }
+        if (!flag) {
+            printf("Введенная строка  - не число!\n");
+        }
+        if (errno == ERANGE) {
+            printf("Строка выходит за допустимые пределы!\n");
+            continue;
+        }
+        if (!errno && l >= min && l <= max) {
+            return l;
+        } else {
+            printf("Выход за границы диапазона, ожидаемые значения: min - %d, max - %d.\n", min, max);
+        }
+    }
+}
 
+int main() {
+    char str[10];
+    read_int(str, 0, 20);
 }

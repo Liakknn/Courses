@@ -85,8 +85,6 @@ char* my_strncat(char *dest, const char *src, size_t n) {
 }
 
 int main() {
-    char str1[] = "Hello";
-    char str2[] = "liza";
     char *str = "Sample string";
     char  buf[10] = {0}; // буфер размером меньше строки
     my_strncpy(buf, "Hello", sizeof(buf)-1);

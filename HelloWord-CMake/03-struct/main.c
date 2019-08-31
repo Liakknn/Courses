@@ -1,5 +1,6 @@
 #include "person.h"
 #include <stdlib.h>
+#include <stdbool.h>
 
 int main() {
 
@@ -13,7 +14,8 @@ int main() {
         "2 - добавление нового человека в базу данных;\n"
         "3 - удаление человека из базы данных.\n"
         "любая другая цифра - закрытие меню\n");
-	while(1) {
+	    bool flag = true;
+	while(flag) {
         printf("Введите команду:");
         int number;
         scanf("%d", &number);
@@ -61,13 +63,12 @@ int main() {
                 break;
             }
             default:
-                goto Exit;
+                closeDataBase(dataBase);
+                free(person1);
+                free(person2);
+                flag = false;
         }
     }
-    Exit:
-    closeDataBase(dataBase);
-    free(person1);
-    free(person2);
 }
 
 

@@ -3,7 +3,7 @@
 add_executable(Sort "Sort.h"
         "Sort_Bubble.c"
         "Sort_Natural_Merge.c"
-        #"Sort_Quick.c"
+        "Sort_Quick.c"
         "Sort_Shaker.c"
         "Sort_Main.c"
         #"Sort_Insert.c"
