@@ -22,31 +22,6 @@ int read_int(const char *prompt, int min, int max) {
                 printf("Введенная строка превышает допустимый размер!\n");
                 continue;
             }
-            char *endptr = NULL;
-            errno = 0;
-            long l = strtol(buf, &endptr, 10);
-            if (buf == endptr) {
-                printf("Введенная строка - не число!\n");
-                continue;
-            }
-            for (char *p = endptr; *p != '\0'; ++p) {
-                if (!isspace(*p)) {
-                    flag = false;
-                    break;
-                }
-            }
-            if (!flag) {
-                printf("Введенная строка  - не число!\n");
-            }
-            if (errno == ERANGE) {
-                printf("Строка выходит за допустимые пределы!\n");
-                continue;
-            }
-            if (l >= min && l <= max) {
-                return (int) l;
-            } else {
-                printf("Выход за границы диапазона, ожидаемые значения: min - %d, max - %d.\n", min, max);
-            }
         }
         char *endptr = NULL;
         errno = 0;
@@ -56,7 +31,7 @@ int read_int(const char *prompt, int min, int max) {
             continue;
         }
         bool flag = true;
-        for (char *p = endptr; p != '\0'; ++p) {
+        for (char *p = endptr; *p != '\0'; ++p) {
             if (!isspace(*p)) {
                 flag = false;
                 break;
@@ -64,12 +39,13 @@ int read_int(const char *prompt, int min, int max) {
         }
         if (!flag) {
             printf("Введенная строка  - не число!\n");
+            continue;
         }
         if (errno == ERANGE) {
             printf("Строка выходит за допустимые пределы!\n");
             continue;
         }
-        if (!errno && l >= min && l <= max) {
+        if (l >= min && l <= max) {
             return l;
         } else {
             printf("Выход за границы диапазона, ожидаемые значения: min - %d, max - %d.\n", min, max);
@@ -78,6 +54,6 @@ int read_int(const char *prompt, int min, int max) {
 }
 
 int main() {
-    char str[10];
-    read_int(str, 0, 20);
+    int i = read_int("Введите n: ", -100, 100);
+    printf("Успешно: %d", i);
 }
