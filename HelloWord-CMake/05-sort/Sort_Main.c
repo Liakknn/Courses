@@ -10,12 +10,13 @@ int main() {
         printf("%d ",p3[i]);
     }
     printf("\n");
-    int p4[] = {2, 1, 9, 6, 5};
+    int p4[] = {2, 1, 9, 6, 5, 6, 8, 9, 0, 1, 2, 3};
     //sort_selection(p4, 5);
     //sort_bubble(p4, 5);
     //sort_shaker(p4, 5);
-    sort_quick(p4, 5);
-    for(int i = 0; i < 5; ++i) {
+    //sort_quick(p4, 5);
+    NaturalMergeSort(p4, 12);
+    for(int i = 0; i < 12; ++i) {
         printf("%d ", p4[i]);
     }
 }
