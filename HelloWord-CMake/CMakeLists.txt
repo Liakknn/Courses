@@ -12,11 +12,7 @@ elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
 	add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-
 # comment
-add_subdirectory(01-basics)
-add_subdirectory(02-functions)
-add_subdirectory(03-struct)
-add_subdirectory(04-memory)
-add_subdirectory(05-sort)
+add_subdirectory(libutils)
+add_subdirectory(sort-comparison)
 
