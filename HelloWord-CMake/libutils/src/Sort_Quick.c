@@ -1,4 +1,4 @@
-#include "Sort.h"
+#include "../include/libutils/Sort.h"
 
 void sort_quick(int* data, int n) {
     if(n == 0 || n == 1) {
