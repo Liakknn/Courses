@@ -28,6 +28,13 @@ void merge(const int *p1, int n1, const int *p2, int n2, int *dst, bool forward)
     }
 }
 
+void printArray(int *data, int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", data[i]);
+    }
+    printf("\n");
+}
+
 int sequence(int *data, int n, bool forward) {
     int count = 1;
     if (forward) {
@@ -43,7 +50,7 @@ int sequence(int *data, int n, bool forward) {
 }
 
 void swap(int **a, int **b) {
-    int* temp = *a;
+    int *temp = *a;
     *a = *b;
     *b = temp;
 }
@@ -58,23 +65,23 @@ void NaturalMergeSort(int *data, int n) {
         int left = sequence(data, n, true);
         int right = sequence(data, n, false);
         merge(data, left, data + n - right, right, buffer, true);
-        if(left + right == n + 1) {
+        if (left + right == n + 1) {
             break;
         }
-        int left2 = sequence(data + left, n - left - right, true);
-        int right2 = sequence(data + left, n - left - right, false);
-        merge(data + left, left2, data + n - right - right2, right2, buffer, false);
+        int left2 = sequence(data + left, n - right, true);
+        int right2 = sequence(data + left, n - right, false);
+        merge(data + left, left2, data + n - right, right2, buffer, false);
         ++count;
-        if(count % 2 != 0) {
-            swap(&data, &buffer);
+        for(int i = 0; i < left + right; ++i) {
+            printf("%d ", buffer[i]);
         }
-        for(int i = left + left2; i < n - right - right2; ++i) {
+        for (int i = left + right; i < n - left2 - right2; ++i) {
             buffer[i] = data[i];
+            printf("%d ", buffer[i]);
         }
-        for(int i = 0; i < n; ++i)  {
-            data[i] = buffer[i];
-        }
-        free(buffer);
+        swap(&data, &buffer);
     }
+    //swap(&data, &buffer);
+    //free(buffer);
 }
 
