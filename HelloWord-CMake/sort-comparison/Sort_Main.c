@@ -2,37 +2,42 @@
 #include <stdio.h>
 
 
-void test(int n) {
-    int* buffer1 = malloc(sizeof(int) * n);
-    int* buffer2 = malloc(sizeof(int) * n);
-    int* buffer3 = malloc(sizeof(int) * n);
-    int* buffer4 = malloc(sizeof(int) * n);
-    for(int i = 0; i < n; ++i) {
-        buffer1[i] = rand() % 100;
-        printf("%d", buffer1[i]);
-    }
-    printf("\n");
-    for(int i = 0; i < n; ++i) {
-        buffer2[i] = rand() % 100;
-        printf("%d", buffer2[i]);
-    }
-    printf("\n");
-    
-    for(int i = 0; i < n; ++i) {
-        buffer3[i] = rand() % 100;
-        printf("%d", buffer3[i]);
-    }
-    printf("\n");
-    for(int i = 0; i < n; ++i) {
-        buffer4[i] = rand() % 100;
-        printf("%d", buffer4[i]);
-    }
-    printf("\n");
+bool compareArrays(int * a, int * b, size_t count) {
+    for ( size_t i = 0; i < count; ++i )
+        if ( a[i] != b[i] )
+            return false;
+    return true;
+}
 
-    free(buffer1);
-    free(buffer2);
-    free(buffer3);
-    free(buffer4);
+void testSort(size_t n) {
+    int *masBubbleSort = malloc(sizeof(int) * n);
+    int *masSelectionSort = malloc(sizeof(int) * n);
+    int *masShakerSort = malloc(sizeof(int) * n);
+    int *masQuickSort = malloc(sizeof(int) * n);
+    int r = 0;
+    for (size_t i = 0; i < n; i++) {
+        r = rand() % 100;
+        masBubbleSort[i] = r;
+        masSelectionSort[i] = r;
+        masShakerSort[i] = r;
+        masQuickSort[i] = r;
+    }
+    sort_bubble(masBubbleSort, n);
+    sort_selection(masSelectionSort, n);
+    sort_shaker(masShakerSort, n);
+    sort_quick(masQuickSort, n);
+
+    if(!(compareArrays(masBubbleSort,masSelectionSort,n)&&compareArrays(masSelectionSort,masShakerSort,n)&&compareArrays(masShakerSort,masQuickSort,n))){
+        printf("Массивы не сопадают\n");
+    }
+    printArray(masBubbleSort, n);
+    printArray(masSelectionSort, n);
+    printArray(masShakerSort, n);
+    printArray(masQuickSort, n);
+    free(masBubbleSort);
+    free(masSelectionSort);
+    free(masShakerSort);
+    free(masQuickSort);
 }
 
 int main() {
@@ -43,6 +48,7 @@ int main() {
 
     printf("\n");
     int p4[] = {2, 1, 9, 6, 5, 6, 8, 9, 0, 1, 2, 3};
+    testSort(20);
     //sort_selection(p4, 5);
     //sort_bubble(p4, 5);
     //sort_shaker(p4, 5);
