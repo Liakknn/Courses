@@ -15,4 +15,5 @@ endif()
 # comment
 add_subdirectory(libutils)
 add_subdirectory(sort-comparison)
+add_subdirectory(ds-comparison)
 
