@@ -1,4 +1,4 @@
-#include <libutils/Three.h>
+#include <libutils/Tree.h>
 
 int main() {
     struct Tree* t1 = create_tree(1, NULL, NULL);
