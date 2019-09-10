@@ -23,10 +23,10 @@ void testSort(size_t n, size_t m) {
         for (size_t k = 0; k < n; ++k) {
             int r = 0;
             r = rand() % 100;
-            masBubbleSort[i] = r;
-            masSelectionSort[i] = r;
-            masShakerSort[i] = r;
-            masQuickSort[i] = r;
+            masBubbleSort[k] = r;
+            masSelectionSort[k] = r;
+            masShakerSort[k] = r;
+            //masQuickSort[k] = r;
         }
         clock_t start = clock();
         sort_bubble(masBubbleSort, n);
@@ -41,7 +41,7 @@ void testSort(size_t n, size_t m) {
         sort_quick(masQuickSort, n);
         finish4 += clock() - start;
     }
-    printf("Среднее время выполнения Sort_Bubble: %f\n", ((double) finish1 / CLOCKS_PER_SEC / m));
+    printf("Среднее время выполнения Sort_Bubble: %f\n", ((double) finish1 / CLOCKS_PER_SEC ) / m);
     printf("Среднее время выполнения Sort_Selection: %f\n", ((double) finish2 / CLOCKS_PER_SEC) / m);
     printf("Среднее время выполнения Sort_Shaker: %f\n", ((double) finish3 / CLOCKS_PER_SEC) / m);
     printf("Среднее время выполнения Sort_Quick: %f\n", ((double) finish4 / CLOCKS_PER_SEC) / m);
@@ -70,7 +70,7 @@ int main() {
 
     printf("\n");
     //int p4[] = {2, 1, 9, 6, 5, 6, 8, 9, 0, 1, 2, 3};
-    testSort(1000, 1000);
+    testSort(10000, 1000);
     //sort_selection(p4, 5);
     //sort_bubble(p4, 5);
     //sort_shaker(p4, 5);

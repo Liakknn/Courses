@@ -11,7 +11,7 @@ int min(const int* data, int n) {
 }
 
 void sort_selection(int* data, int n) {
-    for(int i = 0; i < n - i; ++i) {
+    for(int i = 0; i < n - 1; ++i) {
         int minIndex = i + min(data + i, n - i);
         int tmp = data[i];
         data[i] = data[minIndex];

@@ -1,18 +1,26 @@
 #include <libutils/List.h>
 #include <stdlib.h>
-/*
+
 struct List {
     int data;
     struct  List* prev;
     struct List* next;
 };
 
+void set(struct List** head, int data) {
+    find(*head, data)->data = data;
+}
+
+struct List* get(struct List* head, int data) {
+    return find(head, data);
+}
+
 struct List* add(struct List** head, int data) {
     if(*head == NULL) {
         *head = malloc(sizeof(struct List));
-        *head->data = data;
-        &(*head)->prev = NULL;
-        &(*head)->next = NULL;
+        (*head)->data = data;
+        (*head)->prev = NULL;
+        (*head)->next = NULL;
         return *head;
 
     } else {
@@ -28,9 +36,33 @@ struct List* add(struct List** head, int data) {
     }
 }
 
-void removeList(struct List** head, struct List* node);
-size_t count(struct List* head) {
+struct List* find(struct List *head, int data) {
+    while (head != NULL) {
+        if (head->data == data) {
+            return head;
+        }
+        head = head->next;
+    }
+    return NULL;
+}
+
+void removeList(struct List** head, struct List* node) {
 
 }
-struct List* find(struct List*, int data);
- */
+
+size_t count(struct List *head) {
+    size_t count = 0;
+    while (head != NULL) {
+        ++count;
+        head = head->next;
+    }
+    return count;
+}
+
+void list_print(struct List *head) {
+    while (head != NULL) {
+        printf("%d ", head->data);
+        head = head->next;
+    }
+    printf("\n");
+}

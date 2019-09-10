@@ -2,7 +2,9 @@
 
 struct List;
 struct List* add(struct List** head, int data);
-
 void removeList(struct List** head, struct List* node);
 size_t count(struct List* head);
 struct List* find(struct List*, int data);
+void set(struct List** head, int data);
+struct List* get(struct List* head, int data);
+void list_print(struct List *head);
