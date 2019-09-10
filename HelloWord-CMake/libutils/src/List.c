@@ -7,12 +7,12 @@ struct List {
     struct List* next;
 };
 
-void set(struct List** head, int data) {
-    find(*head, data)->data = data;
+void set_list(struct List* head, int data){
+    head->data = data;
 }
 
-struct List* get(struct List* head, int data) {
-    return find(head, data);
+int get_list(struct List* head) {
+    return head->data;
 }
 
 struct List* add(struct List** head, int data) {
@@ -44,6 +44,10 @@ struct List* find(struct List *head, int data) {
         head = head->next;
     }
     return NULL;
+}
+
+void insert_list(struct List* head ) {
+
 }
 
 void removeList(struct List** head, struct List* node) {
